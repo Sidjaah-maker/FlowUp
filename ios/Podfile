@@ -5,7 +5,7 @@ require Pod::Executable.execute_command('node', ['-p',
     {paths: [process.argv[1]]},
   )', __dir__]).strip
 
-platform :ios, min_ios_version_supported
+platform :ios, '15.1' # J'ai mis une version iOS commune, ajuste si besoin
 prepare_react_native_project!
 
 linkage = ENV['USE_FRAMEWORKS']
@@ -23,13 +23,24 @@ target 'FlowUp' do
     :app_path => "#{Pod::Config.instance.installation_root}/.."
   )
 
+  # C'est ici que nous modifions
   post_install do |installer|
-    # https://github.com/facebook/react-native/blob/main/packages/react-native/scripts/react_native_pods.rb#L197-L202
+    # --- DÉBUT DU CODE AJOUTÉ ---
+    # Ce bloc corrige les problèmes de signature de code pour le build
+    installer.pods_project.targets.each do |target|
+      target.build_configurations.each do |config|
+        config.build_settings['EXPANDED_CODE_SIGN_IDENTITY'] = ""
+        config.build_settings['CODE_SIGNING_REQUIRED'] = "NO"
+        config.build_settings['CODE_SIGNING_ALLOWED'] = "NO"
+      end
+    end
+    # --- FIN DU CODE AJOUTÉ ---
+
+    # On conserve l'appel original qui est essentiel pour React Native
     react_native_post_install(
       installer,
       config[:reactNativePath],
-      :mac_catalyst_enabled => false,
-      # :ccache_enabled => true
+      :mac_catalyst_enabled => false
     )
   end
 end

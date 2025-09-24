@@ -1,9 +1,6 @@
 package com.flowup
 
-override fun onCreate(savedInstanceState: Bundle?) {
-  super.onCreate(null)
-}
-
+import android.os.Bundle // L'importation doit être ici
 import com.facebook.react.ReactActivity
 import com.facebook.react.ReactActivityDelegate
 import com.facebook.react.defaults.DefaultNewArchitectureEntryPoint.fabricEnabled
@@ -15,12 +12,24 @@ class MainActivity : ReactActivity() {
    * Returns the name of the main component registered from JavaScript. This is used to schedule
    * rendering of the component.
    */
-  override fun getMainComponentName(): String = "FlowUp"
+  override fun getMainComponentName(): String = "FlowUp" // Assure-toi que "FlowUp" est bien le nom de ton projet
+
+  /**
+   * La fonction onCreate doit être À L'INTÉRIEUR de la classe MainActivity.
+   */
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(null)
+  }
 
   /**
    * Returns the instance of the [ReactActivityDelegate]. We use [DefaultReactActivityDelegate]
-   * which allows you to enable New Architecture with a single boolean flags [fabricEnabled]
+   * which allows you to enable New Architecture with a single boolean flag [fabricEnabled]
    */
-  override fun createReactActivityDelegate(): ReactActivityDelegate =
-      DefaultReactActivityDelegate(this, mainComponentName, fabricEnabled)
+  override fun createReactActivityDelegate(): ReactActivityDelegate {
+    return DefaultReactActivityDelegate(
+      this,
+      mainComponentName,
+      fabricEnabled
+    )
+  }
 }

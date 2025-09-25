@@ -2,10 +2,16 @@ import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { colors } from '../constants/colors';
 
-const CircularProgress = () => {
+// On ajoute une prop pour recevoir le temps à afficher
+interface CircularProgressProps {
+  time: string;
+}
+
+const CircularProgress: React.FC<CircularProgressProps> = ({ time }) => {
   return (
     <View style={styles.container}>
-      <Text style={styles.timeText}>14:25:10</Text>
+      {/* On utilise la prop 'time' */}
+      <Text style={styles.timeText}>{time}</Text>
       <Text style={styles.phaseText}>Phase Anabolique</Text>
     </View>
   );
@@ -15,11 +21,10 @@ const styles = StyleSheet.create({
   container: {
     width: 300,
     height: 300,
-    borderRadius: 150, // La moitié de la largeur/hauteur pour un cercle parfait
+    borderRadius: 150,
     backgroundColor: colors.surface,
     justifyContent: 'center',
     alignItems: 'center',
-    // Ombre pour donner un effet de profondeur
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 5 },
     shadowOpacity: 0.1,

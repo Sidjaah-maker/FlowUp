@@ -1,22 +1,33 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
+
+// On importe nos nouveaux composants !
+import Container from '../components/Container';
+import CircularProgress from '../components/CircularProgress';
 
 function TimerScreen() {
   return (
-    <View style={styles.container}>
-      <Text style={styles.text}>Écran du Minuteur</Text>
-    </View>
+    <Container>
+      <View style={styles.progressContainer}>
+        <CircularProgress />
+      </View>
+      <View style={styles.controlsContainer}>
+        {/* Les boutons viendront ici */}
+      </View>
+    </Container>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
+  progressContainer: {
+    flex: 3, // Prend 3/4 de l'espace vertical
     justifyContent: 'center',
     alignItems: 'center',
   },
-  text: {
-    fontSize: 24,
+  controlsContainer: {
+    flex: 1, // Prend 1/4 de l'espace vertical
+    justifyContent: 'space-around',
+    alignItems: 'center',
   },
 });
 

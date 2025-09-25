@@ -1,18 +1,32 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, Alert } from 'react-native';
 
-// On importe nos nouveaux composants !
 import Container from '../components/Container';
 import CircularProgress from '../components/CircularProgress';
+// On importe notre nouveau composant !
+import Button from '../components/Button';
 
 function TimerScreen() {
+  const handleStartPress = () => {
+    Alert.alert('Action', 'Le minuteur devrait démarrer !');
+  };
+
+  const handleResetPress = () => {
+    Alert.alert('Action', 'Le minuteur devrait se réinitialiser !');
+  };
+
   return (
     <Container>
       <View style={styles.progressContainer}>
         <CircularProgress />
       </View>
       <View style={styles.controlsContainer}>
-        {/* Les boutons viendront ici */}
+        <Button
+          title="Réinitialiser"
+          onPress={handleResetPress}
+          variant="secondary"
+        />
+        <Button title="Démarrer" onPress={handleStartPress} variant="primary" />
       </View>
     </Container>
   );
@@ -20,13 +34,14 @@ function TimerScreen() {
 
 const styles = StyleSheet.create({
   progressContainer: {
-    flex: 3, // Prend 3/4 de l'espace vertical
+    flex: 3,
     justifyContent: 'center',
     alignItems: 'center',
   },
   controlsContainer: {
-    flex: 1, // Prend 1/4 de l'espace vertical
-    justifyContent: 'space-around',
+    flex: 1,
+    flexDirection: 'row', // Aligne les boutons horizontalement
+    justifyContent: 'space-around', // Espace équitable entre les boutons
     alignItems: 'center',
   },
 });

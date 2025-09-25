@@ -1,22 +1,20 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
-
 import Container from '../components/Container';
 import CircularProgress from '../components/CircularProgress';
 import Button from '../components/Button';
-// On importe notre nouveau Hook !
 import { useFastingTimer } from '../hooks/useFastingTimer';
 
 function TimerScreen() {
-  // On utilise le Hook pour obtenir la logique et les données
-  const { isActive, formattedTime, toggleTimer, resetTimer } =
+  // On récupère la phase actuelle depuis le hook
+  const { isActive, formattedTime, currentPhase, toggleTimer, resetTimer } =
     useFastingTimer();
 
   return (
     <Container>
       <View style={styles.progressContainer}>
-        {/* On passe le temps formaté au composant d'affichage */}
-        <CircularProgress time={formattedTime} />
+        {/* Et on la passe en prop au composant d'affichage */}
+        <CircularProgress time={formattedTime} phase={currentPhase} />
       </View>
       <View style={styles.controlsContainer}>
         <Button
@@ -24,7 +22,6 @@ function TimerScreen() {
           onPress={resetTimer}
           variant="secondary"
         />
-        {/* Le titre du bouton change en fonction de l'état 'isActive' */}
         <Button
           title={isActive ? 'Pause' : 'Démarrer'}
           onPress={toggleTimer}
@@ -35,6 +32,7 @@ function TimerScreen() {
   );
 }
 
+// ... le reste du fichier (styles) ne change pas ...
 const styles = StyleSheet.create({
   progressContainer: {
     flex: 3,

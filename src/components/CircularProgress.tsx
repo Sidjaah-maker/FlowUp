@@ -1,22 +1,26 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { colors } from '../constants/colors';
+// On importe le type pour la phase
+import { FastingPhase } from '../data/fastingPhases';
 
-// On ajoute une prop pour recevoir le temps à afficher
 interface CircularProgressProps {
   time: string;
+  phase: FastingPhase; // On attend maintenant un objet 'phase' complet
 }
 
-const CircularProgress: React.FC<CircularProgressProps> = ({ time }) => {
+const CircularProgress: React.FC<CircularProgressProps> = ({ time, phase }) => {
   return (
     <View style={styles.container}>
-      {/* On utilise la prop 'time' */}
       <Text style={styles.timeText}>{time}</Text>
-      <Text style={styles.phaseText}>Phase Anabolique</Text>
+      {/* On affiche le nom de la phase */}
+      <Text style={styles.phaseText}>{phase.name}</Text>
     </View>
   );
 };
 
+// ... le reste du fichier (styles) ne change pas ...
+// styles à copier si besoin
 const styles = StyleSheet.create({
   container: {
     width: 300,

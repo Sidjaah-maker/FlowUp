@@ -1,31 +1,46 @@
 import { useState, useEffect, useRef } from 'react';
+// On importe nos données et le type
+import { fastingPhases, FastingPhase } from '../data/fastingPhases';
 
 export const useFastingTimer = () => {
   const [seconds, setSeconds] = useState(0);
   const [isActive, setIsActive] = useState(false);
+  // NOUVEL ÉTAT : pour suivre la phase actuelle
+  const [currentPhase, setCurrentPhase] = useState<FastingPhase>(
+    fastingPhases[0],
+  );
 
-  // useRef est utilisé pour garder une référence stable à notre intervalle
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     if (isActive) {
-      // Si le minuteur est actif, on lance l'intervalle
       intervalRef.current = setInterval(() => {
-        setSeconds(prevSeconds => prevSeconds + 1);
+        setSeconds(prevSeconds => {
+          const newSeconds = prevSeconds + 1;
+          const hours = newSeconds / 3600;
+
+          // On cherche la phase correspondante
+          // On parcourt à l'envers pour trouver la plus haute phase atteinte
+          for (let i = fastingPhases.length - 1; i >= 0; i--) {
+            if (hours >= fastingPhases[i].startHour) {
+              setCurrentPhase(fastingPhases[i]);
+              break; // On sort de la boucle dès qu'on a trouvé
+            }
+          }
+
+          return newSeconds;
+        });
       }, 1000);
     } else if (!isActive && intervalRef.current) {
-      // S'il est inactif, on nettoie l'intervalle
       clearInterval(intervalRef.current);
     }
 
-    // Fonction de nettoyage de useEffect
-    // Elle est appelée quand le composant est démonté ou avant chaque ré-exécution de l'effet
     return () => {
       if (intervalRef.current) {
         clearInterval(intervalRef.current);
       }
     };
-  }, [isActive]); // Cet effet ne se redéclenche que si `isActive` change
+  }, [isActive]);
 
   const toggleTimer = () => {
     setIsActive(!isActive);
@@ -34,11 +49,11 @@ export const useFastingTimer = () => {
   const resetTimer = () => {
     setIsActive(false);
     setSeconds(0);
+    setCurrentPhase(fastingPhases[0]); // On réinitialise aussi la phase
   };
 
-  // Formate les secondes en HH:MM:SS
   const formattedTime = new Date(seconds * 1000).toISOString().substr(11, 8);
 
-  // On expose les états et les fonctions dont notre UI aura besoin
-  return { isActive, formattedTime, toggleTimer, resetTimer };
+  // On expose la phase actuelle en plus du reste
+  return { isActive, formattedTime, currentPhase, toggleTimer, resetTimer };
 };

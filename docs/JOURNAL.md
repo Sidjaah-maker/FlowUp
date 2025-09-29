@@ -6,6 +6,21 @@ Ce document retrace les décisions clés, les étapes importantes et les défis 
 
 ### 29 Septembre 2025 - Améliorations et Corrections
 
+- **Objectif** : Mettre en place la fonctionnalité de recherche d'exercices.
+- **Décisions Clés** :
+  - Implémentation d'un écran de recherche avec une `FlatList` pour afficher les exercices.
+  - Ajout d'une `SearchBar` pour filtrer les exercices en temps réel.
+  - Utilisation de `useState` et `useEffect` pour gérer l'état de la recherche et le filtrage.
+- **Actions Réalisées** :
+  - Mise à jour de `WorkoutScreen.tsx` pour inclure la logique de recherche et d'affichage.
+  - Création du composant `ExerciseListItem` pour un affichage modulaire.
+  - Intégration des données d'exercices depuis `src/data/exercises.ts`.
+- **Prochaine Étape** : Implémenter la sélection d'exercices et la création de séances d'entraînement.
+
+---
+
+### 29 Septembre 2025 - Améliorations et Corrections
+
 - **Objectif** : Fiabiliser les données de l'application et améliorer la structure du projet.
 - **Décisions Clés** :
   - Correction des heures de démarrage des phases de jeûne pour refléter des données plus précises.

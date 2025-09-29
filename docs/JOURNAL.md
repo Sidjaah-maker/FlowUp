@@ -4,6 +4,20 @@ Ce document retrace les décisions clés, les étapes importantes et les défis 
 
 ---
 
+### 29 Septembre 2025 - Améliorations et Corrections
+
+- **Objectif** : Fiabiliser les données de l'application et améliorer la structure du projet.
+- **Décisions Clés** :
+  - Correction des heures de démarrage des phases de jeûne pour refléter des données plus précises.
+  - Réorganisation des fichiers de configuration iOS pour une meilleure clarté.
+- **Actions Réalisées** :
+  - Mise à jour du fichier `src/data/fastingPhases.ts` avec les nouvelles valeurs.
+  - Déplacement de `Gemfile` et `Gemfile.lock` dans le dossier `ios`.
+  - Mise à jour des dépendances natives (iOS) et JavaScript.
+- **Prochaine Étape** : Développement de l'écran du minuteur.
+
+---
+
 ### Septembre 2025 - Initialisation du Projet
 
 - **Objectif** : Démarrer le projet FlowUP sur des bases solides.

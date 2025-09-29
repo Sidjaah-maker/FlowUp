@@ -4,6 +4,21 @@ Ce document retrace les décisions clés, les étapes importantes et les défis 
 
 ---
 
+### 29 Septembre 2025 - Implémentation de l'Écran de Détail d'Exercice
+
+- **Objectif** : Permettre aux utilisateurs de voir les détails d'un exercice et d'enregistrer leurs séries.
+- **Décisions Clés** :
+  - L'écran `ExerciseDetailScreen` affiche le nom de l'exercice et une liste des séries effectuées.
+  - Création d'un composant réutilisable `AddSetForm` pour ajouter des séries (poids et répétitions).
+  - Utilisation d'une `FlatList` avec des composants optimisés (`React.memo`) pour afficher les séries de manière performante.
+- **Actions Réalisées** :
+  - Implémentation de la logique et de l'interface dans `ExerciseDetailScreen.tsx`.
+  - Création du nouveau composant `src/components/AddSetForm.tsx`.
+  - Gestion de l'état local pour les séries ajoutées.
+- **Prochaine Étape** : Persister les séries enregistrées dans le stockage local.
+
+---
+
 ### 29 Septembre 2025 - Mise en place de la Navigation Workout
 
 - **Objectif** : Mettre en place la navigation pour la section entraînement.

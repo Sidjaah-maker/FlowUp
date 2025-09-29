@@ -4,6 +4,21 @@ Ce document retrace les décisions clés, les étapes importantes et les défis 
 
 ---
 
+### 29 Septembre 2025 - Mise en place de la Navigation Workout
+
+- **Objectif** : Mettre en place la navigation pour la section entraînement.
+- **Décisions Clés** :
+  - Création d'un `StackNavigator` dédié (`WorkoutStackNavigator`) pour gérer la navigation au sein de l'onglet "Workout".
+  - L'écran `WorkoutScreen` (maintenant `WorkoutList`) gère l'affichage et la recherche d'exercices.
+  - La sélection d'un exercice navigue vers un nouvel écran `ExerciseDetailScreen`.
+- **Actions Réalisées** :
+  - Création des fichiers `WorkoutStackNavigator.tsx` et `ExerciseDetailScreen.tsx`.
+  - Mise à jour de `AppNavigator.tsx` pour intégrer le nouveau stack.
+  - Modification de `WorkoutScreen.tsx` pour gérer la navigation vers le détail de l'exercice.
+- **Prochaine Étape** : Implémenter l'affichage des détails de l'exercice dans `ExerciseDetailScreen`.
+
+---
+
 ### 29 Septembre 2025 - Améliorations et Corrections
 
 - **Objectif** : Mettre en place la fonctionnalité de recherche d'exercices.

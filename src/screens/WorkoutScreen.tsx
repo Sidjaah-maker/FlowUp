@@ -1,11 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { FlatList, StyleSheet, Alert } from 'react-native';
+import { FlatList, StyleSheet } from 'react-native';
 import Container from '../components/Container';
 import SearchBar from '../components/SearchBar';
 import ExerciseListItem from '../components/ExerciseListItem';
 import { exercises, Exercise } from '../data/exercises';
 
-function WorkoutScreen() {
+// Types pour la navigation
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { WorkoutStackParamList } from '../navigation/WorkoutStackNavigator';
+
+type Props = NativeStackScreenProps<WorkoutStackParamList, 'WorkoutList'>;
+
+function WorkoutScreen({ navigation }: Props) {
+  // On récupère 'navigation' depuis les props
   const [searchQuery, setSearchQuery] = useState('');
   const [filteredExercises, setFilteredExercises] =
     useState<Exercise[]>(exercises);
@@ -18,7 +25,8 @@ function WorkoutScreen() {
   }, [searchQuery]);
 
   const handleExercisePress = (item: Exercise) => {
-    Alert.alert('Exercice sélectionné', item.name);
+    // ON NAVIGUE ! On passe l'objet 'item' en paramètre.
+    navigation.navigate('ExerciseDetail', { exercise: item });
   };
 
   return (
